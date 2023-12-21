@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 function TrailerVideo() {
    const movies = useSelector((state) => state.movie.nowPlayingMovies);
    if (!movies) return;
-   const oneMovie = movies[0];
+   const oneMovie = movies[1];
    const { title, overview, id } = oneMovie;
  
    return (
