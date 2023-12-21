@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import HomeHeader from "../components/Home/HomeHeader";
+import TrailerVideo from "../components/Home/TrailerVideo";
+import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 
 function Home() {
-  return (
-    <div>Home</div>
-  )
+   useNowPlayingMovies();
+
+   return (
+      <div>
+         <HomeHeader />
+         <TrailerVideo />
+      </div>
+   );
 }
 
-export default Home
+export default Home;
