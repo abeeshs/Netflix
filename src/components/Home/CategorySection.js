@@ -1,30 +1,25 @@
-import React, { useEffect } from "react";
-import { TMDB_API_OPTION } from "../../constant";
-import { useDispatch, useSelector } from "react-redux";
-import { addTopRatedMovies } from "../../redux/slice/movieSlice";
+import React from "react";
+import { useSelector } from "react-redux";
 import MovieList from "./MovieList";
+import useTopRatedMovies from "../../hooks/useTopRatedMovies";
+import usePopularMovies from "../../hooks/usePopularMovies";
+import useUpcomingMovies from "../../hooks/useUpcomingMovies";
 
 function CategorySection() {
-   const dispatch = useDispatch();
-   const movies = useSelector((state) => state.movie.topRatedMovies);
-   const getTopRatedMovies = async () => {
-      try {
-         const result = await fetch(
-            "https://api.themoviedb.org/3/movie/top_rated",
-            TMDB_API_OPTION
-         );
-         const movies = await result.json();
-         dispatch(addTopRatedMovies(movies.results));
-      } catch (err) {
-         console.log(err);
-      }
-   };
+   const topRated = useSelector((state) => state.movie.topRatedMovies);
+   const popular = useSelector((state) => state.movie.popularMovies);
+   const upComing = useSelector((state) => state.movie.upcomingMovies);
+   useTopRatedMovies();
+   usePopularMovies();
+   useUpcomingMovies();
 
-   useEffect(() => {
-      getTopRatedMovies();
-   // eslint-disable-next-line react-hooks/exhaustive-deps
-   }, []);
-   return <MovieList movies={movies} category="Top Rated" />;
+   return (
+      <div className="">
+         <MovieList movies={topRated} category="Top Rated" isTop={true} />;
+         <MovieList movies={popular} category="Popular Movies" />;
+         <MovieList movies={upComing} category="Upcoming Movies" />;
+      </div>
+   );
 }
 
 export default CategorySection;

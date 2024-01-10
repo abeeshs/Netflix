@@ -8,7 +8,7 @@ function Home() {
    useNowPlayingMovies();
 
    return (
-      <div>
+      <div className="">
          <HomeHeader />
          <TrailerVideo />
          <CategorySection/>
